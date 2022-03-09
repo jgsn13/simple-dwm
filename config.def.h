@@ -17,6 +17,7 @@ static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeHid]  = { col_cyan,  col_gray1, col_cyan  },
 };
 
 /* tagging */
@@ -104,7 +105,6 @@ static Key keys[] = {
 
     // custom
     
-    {MODKEY,                           XK_d,          spawn,             {.v = rofi}},
     {MODKEY,                           XK_p,          spawn,             {.v = print_select}},
     {MODKEY|ControlMask,               XK_p,          spawn,             {.v = print_fullscreen}},
     {MODKEY|ControlMask|ShiftMask,     XK_p,          spawn,             {.v = print_window}},
@@ -128,8 +128,10 @@ static Key keys[] = {
     // other
 
     {MODKEY,                           XK_b,          togglebar,         {0}},
-    {MODKEY,                           XK_j,          focusstack,        {.i = +1}},
-    {MODKEY,                           XK_k,          focusstack,        {.i = -1}},
+	{MODKEY,                           XK_j,          focusstackvis,     {.i = +1 }},
+	{MODKEY,                           XK_k,          focusstackvis,     {.i = -1 }},
+	{MODKEY|ShiftMask,                 XK_j,          focusstackhid,     {.i = +1 }},
+	{MODKEY|ShiftMask,                 XK_k,          focusstackhid,     {.i = -1 }},
     {MODKEY,                           XK_i,          incnmaster,        {.i = +1}},
     {MODKEY,                           XK_o,          incnmaster,        {.i = -1}},
     {MODKEY|ShiftMask,                 XK_h,          setmfact,          {.f = -0.05}},
@@ -142,7 +144,7 @@ static Key keys[] = {
     {MODKEY,                           XK_m,          setlayout,         {.v = &layouts[2]}},
 	{MODKEY,                           XK_u,          setlayout,         {.v = &layouts[3]}},
 	{MODKEY,                           XK_o,          setlayout,         {.v = &layouts[4]}},
-	{MODKEY,                           XK_h,          setlayout,         {.v = &layouts[5]}},
+	{MODKEY,                           XK_d,          setlayout,         {.v = &layouts[5]}},
 	{MODKEY,                           XK_g,          setlayout,         {.v = &layouts[6]}},
     {MODKEY,                           XK_q,          setlayout,         {0}},
     {MODKEY|ShiftMask,                 XK_space,      togglefloating,    {0}},
@@ -154,10 +156,8 @@ static Key keys[] = {
     {MODKEY|ShiftMask,                 XK_comma,      tagmon,            {.i = -1}},
     {MODKEY|ShiftMask,                 XK_period,     tagmon,            {.i = +1}},
     {MODKEY,                           XK_n,          toggletag,         {.ui = 1}},
-    /* {MODKEY,                           XK_minus,      setgaps,           {.i = -2}}, */
-    /* {MODKEY,                           XK_equal,      setgaps,           {.i = +2}}, */
-    /* {MODKEY|ShiftMask,                 XK_minus,      setgaps,           {.i = GAP_RESET}}, */
-    /* {MODKEY|ShiftMask,                 XK_equal,      setgaps,           {.i = GAP_TOGGLE}}, */
+	{MODKEY,                           XK_s,          show,             {0}},
+	{MODKEY,                           XK_h,          hide,             {0}},
     TAGKEYS(XK_1, 0)
     TAGKEYS(XK_2, 1)
     TAGKEYS(XK_3, 2)
@@ -173,6 +173,7 @@ static Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
+	{ ClkWinTitle,          0,              Button1,        togglewin,      {0} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
