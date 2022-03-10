@@ -102,6 +102,7 @@ static Key keys[] = {
     /* modifier                        key            function           argument */
     {MODKEY,                           XK_space,      spawn,             {.v = dmenucmd}},
     {MODKEY,                           XK_Return,     spawn,             {.v = termcmd}},
+    {MODKEY|ControlMask,               XK_space,      spawn,             {.v = rofi}},
 
     // custom
     
