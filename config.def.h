@@ -80,10 +80,10 @@ static const char *print_window[] = {"print_window", NULL};
 static const char *copygittoken[] = {"copygittoken", NULL};
 
 /* Move the scripts on scripts folder to /bin */
-static const char *volup[] = {"amixer", "-q", "set", "Master", "5%+", NULL};
-static const char *voldown[] = {"amixer", "-q", "set", "Master", "5%-", NULL};
-static const char *volmute[] = {"amixer", "-q", "set", "Master", "0%", NULL};
-static const char *volunmute[] = {"amixer", "-q", "set", "Master", "60%", NULL};
+static const char *volup[] = {"amixer", "sset", "Master", "5%+", NULL};
+static const char *voldown[] = {"amixer", "sset", "Master", "5%-", NULL};
+static const char *volmute[] = {"amixer", "sset", "Master", "0%", NULL};
+static const char *volunmute[] = {"amixer", "sset", "Master", "60%", NULL};
 
 // commands
 static const char *rofi[] = {"rofi", "-show", "drun", "-show-icons", NULL};
